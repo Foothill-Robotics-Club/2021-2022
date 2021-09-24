@@ -1,0 +1,28 @@
+Github Installation Instructions:
+
+- Make github account if you don't have one
+- Download git client for your OS at: https://git-scm.com/downloads
+- run the setup wizard
+
+Usage Instruction for Git-Bash:
+
+- to clone a repo
+	- type-and-enter "git clone https://github.com/Foothill-Robotics-Club/2021-2022.git" to clone repository
+	- navigate to where you cloned the repository on your computer
+
+- to make new branch
+	- type-and-enter "git checkout -b <your-helper-function>" to make a new branch for your group
+
+- to push to remote
+	- type-and-enter "git add ."
+	- type-and-enter "git commit -m <your-commit-message-describing your helper-function>"
+	- type-and-enter "git push"
+	- if first time pushing, follow error message's instructions
+
+- to recieve changes from the other branches
+	- type-and-enter "git checkout main"
+	- type-and-enter "git pull"
+
+
+It is recommended that you install visual-studio-code on your device for future advanced uses such as resolving merge-conflict
+
