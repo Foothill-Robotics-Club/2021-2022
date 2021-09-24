@@ -3,11 +3,63 @@
 
 task main()
 {
-	while(1){
-		if(vexRT[Btn7L] == 1){
-			motor[left] = 15;
-		}else{
-			motor[left] = 0;
-		}
-	}
+}
+
+/*
+
+Look at this video for instruction
+
+https://wiki.purduesigbots.com/hardware/vex-drivetrains#:~:text=These%20are%20the%20four%20most%20common%20types%20of,Drive%202%20Mecanum%20Drive%203%20X-Drive%204%20H-Drive
+
+use vexRT[Ch1] to access right joystick's x-axis movement on a scale of -127 to 127
+use vexRT[Ch2] to access right joystick's y-axis movement on a scale of -127 to 127
+use vexRT[Ch3] to access left joystick's x-axis movement on a scale of -127 to 127
+use vexRT[Ch4] to access left joystick's y-axis movement on a scale of -127 to 127
+
+https://gm0.org/en/latest/docs/robot-design/drivetrains/
+
+visit this forum if you're stuck
+
+https://www.vexforum.com/t/programming-the-joystick/19797/3
+
+
+*/
+
+
+void moveDegree(float degree){
+/*
+make a function that moves a motor by a certain amount of degrees
+*/
+
+}
+
+void TankDrive(Motor left, Motor right){
+/*
+make a function that lets you drive the robot using tank drivetrain
+follow specifications/instructions at:
+https://gm0.org/en/latest/docs/robot-design/drivetrains/tank.html
+https://gm0.org/en/latest/docs/robot-design/drivetrains/tank.html#wheel-drive
+*/
+
+
+}
+
+void MecanumDrive(Motor left, Motor right){
+/*
+make a function that lets you drive the robot using mecanum drivetrain
+follow specifications/instructions at:
+https://gm0.org/en/latest/docs/robot-design/drivetrains/holonomic.html
+https://gm0.org/en/latest/docs/software/mecanum-drive.html
+*/
+
+
+}
+
+void ArcadeDrive(Motor left, Motor right){
+/*
+make a function that lets you drive the robot using arcade drivetrain
+follow specifications/instructions at:
+https://xiaoxiae.github.io/Robotics-Simplified-Website/drivetrain-control/arcade-drive/
+*/
+
 }
