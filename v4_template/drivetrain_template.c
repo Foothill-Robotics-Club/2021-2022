@@ -3,6 +3,21 @@
 
 task main()
 {
+	int delta = 1;
+	int speed = 0;
+	while (true)
+	{
+		if (speed > 100)
+		{
+			delta = -1;
+		}
+		else if (speed < -100)
+		{
+			delta = 1;
+		}
+		speed += delta;
+		motor[port1] = speed;
+	}
 }
 
 /*
