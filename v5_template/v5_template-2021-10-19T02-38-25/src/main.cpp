@@ -32,7 +32,7 @@ int main() {
         LeftMotor.spin(vex::directionType::rev, 30, vex::velocityUnits::pct);//left motor will spin forward and change direction according to input from the right stick    
         RightMotor.spin(vex::directionType::fwd, 30, vex::velocityUnits::pct);//left motor will spin forward and change direction according to input from the right stick
   } 
-      else if (Controller.ButtonB.pressing()){
+      else if (Controller.ButtonY.pressing()){
         LeftMotor.spin(vex::directionType::fwd, 30, vex::velocityUnits::pct);//left motor will spin forward and change direction according to input from the right stick    
         RightMotor.spin(vex::directionType::rev, 30, vex::velocityUnits::pct);//left motor will spin forward and change direction according to input from the right stick
       } 
