@@ -19,83 +19,106 @@ vex::motor LeftMotor = vex::motor(PORT1);
 vex::motor RightMotor = vex::motor(PORT2);
 vex::motor LiftMotor1 = vex::motor(PORT3);
 vex::motor LiftMotor2 = vex::motor(PORT4);
-vex::motor RingMotor1 = vex::motor(PORT5);
+
+
+vex::motor intake = vex::motor(PORT5);
 vex::motor ClampMotor1 = vex::motor(PORT6);
 
 
 
+void mobility()
+{
+  LeftMotor.spin(vex::directionType::fwd, (Controller.Axis3.value() + Controller.Axis1.value() * 2), vex::velocityUnits::pct);  //left motor will spin forward and change direction according to input from the right stick
+  RightMotor.spin(vex::directionType::fwd, (Controller.Axis3.value() - Controller.Axis1.value() * 2), vex::velocityUnits::pct); //right motor will spin forward and change direction according to input from the left stick
+}
+void Runmotor(vex::motor Motor, int speed, vex::directionType dir)
+{
+  Motor.spin(dir, speed, vex::velocityUnits::pct);
+}
 
 
-void intake(){
+void ConditionalRunning(bool condition, bool other, vex::motor Motor, int speed)
+{
+  if (condition)
+  {
+    Runmotor(Motor, speed, vex::directionType::fwd);
+  }
+  else if (other)
+  {
+    Runmotor(Motor, speed, vex::directionType::rev);
+  }
+  else
+  {
+    Runmotor(Motor, 0, vex::directionType::fwd);
+  }
+}
+void ConditionalRunning(bool condition, bool other, vex::motor Motor1, vex::motor Motor2, int speed)
+{
+  if (condition)
+  {
+    Runmotor(Motor1, speed, vex::directionType::fwd);
+    Runmotor(Motor2, speed, vex::directionType::rev);
+  }
+  else if (other)
+  {
+    Runmotor(Motor1, speed, vex::directionType::rev);
+    Runmotor(Motor2, speed, vex::directionType::fwd);
+  }
+  else
+  {
+    Runmotor(Motor1, 0, vex::directionType::fwd);
+    Runmotor(Motor1, 0, vex::directionType::fwd);
+  }
+}
 
+void clamp()
+{
 }
 
 void userControl(){
-  LeftMotor.spin(vex::directionType::fwd, (Controller.Axis3.value() + Controller.Axis1.value()*2), vex::velocityUnits::pct);//left motor will spin forward and change direction according to input from the right stick
-  RightMotor.spin(vex::directionType::fwd, (Controller.Axis3.value() - Controller.Axis1.value()*2), vex::velocityUnits::pct);//right motor will spin forward and change direction according to input from the left stick
 
-}
-void Runmotor(vex::motor Motor, int speed,vex::directionType  dir){
-  Motor.spin(dir,speed, vex::velocityUnits::pct);
+      ConditionalRunning(Controller.ButtonX.pressing(), Controller.ButtonY.pressing(), LiftMotor1, LiftMotor2, 25);
+    ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 50);
 
-}
-
-void ConditionalRunning(bool condition,bool other, vex::motor Motor,int speed){
-  if(condition){
-    Runmotor(Motor,speed, vex::directionType::fwd);
-  }
-  else if(other){
-    Runmotor(Motor,speed, vex::directionType::rev);
-  }
-  else {
-    Runmotor(Motor,0, vex::directionType::fwd);
-
-  }
-}
-void ConditionalRunning(bool condition,bool other, vex::motor Motor1,vex::motor Motor2,int speed){
-  if(condition){
-    Runmotor(Motor1,speed, vex::directionType::fwd);
-    Runmotor(Motor2,speed, vex::directionType::rev);
-
-  }
-  else if(other){
-    Runmotor(Motor1,speed, vex::directionType::rev);
-    Runmotor(Motor2,speed, vex::directionType::fwd);
-
-  }
-  else {
-    Runmotor(Motor1,0, vex::directionType::fwd);
-    Runmotor(Motor1,0, vex::directionType::fwd);
-
-
-  }
-}
-
-
-
-
-void clamp(){
+    userControl();
+    clamp();
   
-
 }
 
-int main() {
+void autonomousA(){
+  Runmotor(LeftMotor,50,vex::directionType::fwd);
+  Runmotor(LeftMotor,50,vex::directionType::rev);
+  vex::task::sleep(3000);
+
+
+  
+}
+
+void autonomousB(){
+  
+}
+int main()
+{
   // Initializing Robot Configuration. DO NOT REMOVE!
   // bool test = true;
 
   vexcodeInit();
-
-  //LeftMotor.spin(vex::directionType::fwd, (Controller.Axis3.value() + Controller.Axis1.value()*2), vex::velocityUnits::pct);//left motor will spin forward and change direction according to input from the right stick
-    while(1){
-      ConditionalRunning(Controller.ButtonX.pressing(),Controller.ButtonY.pressing(),LiftMotor1,LiftMotor2, 25);
-      ConditionalRunning(Controller.ButtonA.pressing(),Controller.ButtonB.pressing(),RingMotor1,50);
-
+  
+  while(1){
+    if(Controller.ButtonL1.pressing()){
+      autonomousA();
+      vex::task::sleep(1000);
+    }
+    else if(Controller.ButtonL2.pressing()){
+      while(1){
       userControl();
-      clamp();
-      
+      }
+      vex::task::sleep(1000);
 
+    }
 
-    
   }
+  // autonomousA();
+  //LeftMotor.spin(vex::directionType::fwd, (Controller.Axis3.value() + Controller.Axis1.value()*2), vex::velocityUnits::pct);//left motor will spin forward and change direction according to input from the right stick
 
 }
