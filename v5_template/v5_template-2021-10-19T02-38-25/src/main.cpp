@@ -75,28 +75,17 @@ void clamp()
 {
 }
 
+
 void userControl(){
 
-      ConditionalRunning(Controller.ButtonX.pressing(), Controller.ButtonY.pressing(), LiftMotor1, LiftMotor2, 25);
+    ConditionalRunning(Controller.ButtonX.pressing(), Controller.ButtonY.pressing(), LiftMotor1, LiftMotor2, 25);
     ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 50);
-
-    userControl();
+    mobility();
     clamp();
   
 }
 
-void autonomousA(){
-  Runmotor(LeftMotor,50,vex::directionType::fwd);
-  Runmotor(LeftMotor,50,vex::directionType::rev);
-  vex::task::sleep(3000);
 
-
-  
-}
-
-void autonomousB(){
-  
-}
 int main()
 {
   // Initializing Robot Configuration. DO NOT REMOVE!
@@ -105,17 +94,7 @@ int main()
   vexcodeInit();
   
   while(1){
-    if(Controller.ButtonL1.pressing()){
-      autonomousA();
-      vex::task::sleep(1000);
-    }
-    else if(Controller.ButtonL2.pressing()){
-      while(1){
-      userControl();
-      }
-      vex::task::sleep(1000);
-
-    }
+    userControl();
 
   }
   // autonomousA();
