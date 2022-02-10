@@ -37,49 +37,37 @@ void setup(){
 }
 
 
-void Runmotor(vex::motor Motor, int speed, vex::directionType dir)
+void Runmotor(vex::motor Motor, int speed, vex::directionType dir,double t)
 {
-  Motor.spin(dir, speed, vex::velocityUnits::pct);
+  
+  Motor.spinFor(dir,t,vex::timeUnits::msec, speed, vex::velocityUnits::rpm);
 }
 
-void rotateBotLeft(){
-  Runmotor(RightMotor,50,reve);
-  Runmotor(LeftMotor,50,reve);
+
+void rotateBotLeft(double t){
+  Runmotor(RightMotor,50,reve,t);
+  Runmotor(LeftMotor,50,reve,t);
 }
-void driveForward(){
-  Runmotor(LeftMotor,50,fowd);
-  Runmotor(LeftMotor,50,reve);
+void driveForward(double t){
+  Runmotor(LeftMotor,50,fowd, t);
+  Runmotor(RightMotor,50,reve,t);
+
+
 }
-void driveBackward(){
-  Runmotor(LeftMotor,50,fowd);
-  Runmotor(LeftMotor,50,reve);
+void driveBackward(double t){
+  Runmotor(LeftMotor,50,fowd,t);
+  Runmotor(RightMotor,50,reve,t);
 }
-void autonomousA(){
+
+bool autonomousA(){
   // move forward for 3.5'
-  driveForward();
-  vex::task::sleep(3500);
-  // grab base
-  Runmotor(ClampMotor1, 25, fowd);
-  vex::task::sleep(1000);
-  // turn 180 degrees
-  rotateBotLeft();
-  vex::task::sleep(2000);
-  // drive backward for 4.5'
-  driveBackward();
-  vex::task::sleep(4500);
-  // rotate 90 deg
-  rotateBotLeft();
-  vex::task::sleep(1000);
-  // drive back for 1.5'to 2'
-  driveBackward();
-  vex::task::sleep(1500);
-  // drive back for 1.5'to 2'
-  driveBackward();
-  vex::task::sleep(1500);
-  // drive backward 4'
-  driveBackward();
-  vex::task::sleep(4000);
- 
+  driveForward(3500);
+  Runmotor(ClampMotor1, 25,fowd, 1000);
+  rotateBotLeft(2000);
+  driveBackward(4500);
+  rotateBotLeft(1000);
+  driveBackward(5500);
+  return false;
 }
 void autonomousB(){
 
@@ -88,11 +76,12 @@ void autonomousB(){
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
+  bool running =1;
   setup();
   while(!Controller.ButtonL1.pressing()){}
   Brain.Screen.clearScreen();
-  while(1){
-    autonomousA();
+  while(running){
+    running = autonomousA();
     // autonomousB();
   }
   
