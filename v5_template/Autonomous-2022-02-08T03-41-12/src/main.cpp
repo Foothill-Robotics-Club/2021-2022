@@ -11,6 +11,8 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
+using namespace vex;
+
 vex::controller Controller;
 vex::competition Competition;
 vex::motor LeftMotor = vex::motor(PORT1);
@@ -22,9 +24,19 @@ vex::directionType reve = vex::directionType::rev;
 
 vex::motor intake = vex::motor(PORT5);
 vex::motor ClampMotor1 = vex::motor(PORT6);
+void setup(){
+  Brain.Screen.clearLine( 1, black );
+  Brain.Screen.setCursor( 1, 1 );
+  Brain.Screen.print("Mobility Motors: Port 1 and 2\n");
+  Brain.Screen.print("Lift Motors: Port 3 and 4\n");
+  Brain.Screen.print("Intake: Port 5\n");
+  Brain.Screen.print("ClampMotor: Port 4\n");
 
 
-using namespace vex;
+
+}
+
+
 void Runmotor(vex::motor Motor, int speed, vex::directionType dir)
 {
   Motor.spin(dir, speed, vex::velocityUnits::pct);
@@ -76,7 +88,9 @@ void autonomousB(){
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
+  setup();
   while(!Controller.ButtonL1.pressing()){}
+  Brain.Screen.clearScreen();
   while(1){
     autonomousA();
     // autonomousB();
