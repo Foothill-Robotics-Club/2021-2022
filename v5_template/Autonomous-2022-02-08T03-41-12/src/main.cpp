@@ -39,7 +39,7 @@ void setup(){
 }
 
 
-void Runmotor(vex::motor Motor, int speed, vex::directionType dir,double t)
+void runMotorFor(vex::motor Motor, int speed, vex::directionType dir,double t)
 {
   
   Motor.spinFor(dir,t,vex::timeUnits::msec, speed, vex::velocityUnits::rpm);
@@ -47,27 +47,27 @@ void Runmotor(vex::motor Motor, int speed, vex::directionType dir,double t)
 
 
 void rotateBotLeft(double t){
-  Runmotor(RightMotor,50,reve,t);
-  Runmotor(LeftMotor,50,reve,t);
+  runMotorFor(RightMotor,50,reve,t);
+  runMotorFor(LeftMotor,50,reve,t);
 }
 void rotateBotRight(double t){
-  Runmotor(LeftMotor,50,reve,t);
-  Runmotor(RightMotor,50,reve,t);
+  runMotorFor(LeftMotor,50,reve,t);
+  runMotorFor(RightMotor,50,reve,t);
 }
 void driveForward(double t){
-  Runmotor(LeftMotor,50,fowd, t);
-  Runmotor(RightMotor,50,reve,t);
+  runMotorFor(LeftMotor,50,fowd, t);
+  runMotorFor(RightMotor,50,reve,t);
 
 
 }
 void driveBackward(double t){
-  Runmotor(LeftMotor,50,fowd,t);
-  Runmotor(RightMotor,50,reve,t);
+  runMotorFor(LeftMotor,50,fowd,t);
+  runMotorFor(RightMotor,50,reve,t);
 }
 
 bool autonomousA(){
   driveForward(3500);
-  Runmotor(ClampMotor1, 25,fowd, 1000);
+  runMotorFor(ClampMotor1, 25,fowd, 1000);
   rotateBotLeft(2000);
   driveBackward(4500);
   rotateBotLeft(1000);
