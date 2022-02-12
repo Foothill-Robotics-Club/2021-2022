@@ -76,7 +76,7 @@ void userControl()
 {
   while(1){
     ConditionalRunning(Controller.ButtonR2.pressing(), Controller.ButtonR1.pressing(), LeftLiftMotor, RightLiftMotor, 25);
-    ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 70);
+    ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 50);
     mobility();
 
     ConditionalRunning(Controller.ButtonL1.pressing(), Controller.ButtonL2.pressing(), ClampMotor1, 25);
