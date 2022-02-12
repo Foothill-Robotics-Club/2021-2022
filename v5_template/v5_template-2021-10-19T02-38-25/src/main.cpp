@@ -25,8 +25,8 @@ vex::motor ClampMotor1 = vex::motor(PORT3);
 
 void mobility()
 {
-  LeftMotor.spin(vex::directionType::rev, (Controller.Axis3.value()), vex::velocityUnits::pct);  // left motor will spin forward and change direction according to input from the right stick
-  RightMotor.spin(vex::directionType::rev, (Controller.Axis2.value()), vex::velocityUnits::pct); // right motor will spin forward and change direction according to input from the left stick
+  LeftMotor.spin(vex::directionType::rev, (Controller.Axis3.value()*1.05), vex::velocityUnits::pct);  // left motor will spin forward and change direction according to input from the right stick
+  RightMotor.spin(vex::directionType::fwd, (Controller.Axis2.value()), vex::velocityUnits::pct); // right motor will spin forward and change direction according to input from the left stick
 }
 
 void Runmotor(vex::motor Motor, int speed, vex::directionType dir)
@@ -73,7 +73,7 @@ void userControl()
 {
 
   ConditionalRunning(Controller.ButtonX.pressing(), Controller.ButtonY.pressing(), LeftLiftMotor, RightLiftMotor, 25);
-  ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 50);
+  ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 70);
   mobility();
 
   ConditionalRunning(Controller.ButtonL1.pressing(), Controller.ButtonL2.pressing(), ClampMotor1, 25);
