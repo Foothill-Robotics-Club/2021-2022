@@ -22,7 +22,8 @@ vex::motor LeftLiftMotor = vex::motor(PORT2);
 vex::motor RightLiftMotor = vex::motor(PORT12);
 vex::motor intake = vex::motor(PORT13);
 vex::motor ClampMotor1 = vex::motor(PORT3);
-
+bool intakeRunning = false;
+bool reve = false;
 void mobility()
 {
   LeftMotor.spin(vex::directionType::rev, (Controller.Axis3.value()*1.05), vex::velocityUnits::pct);  // left motor will spin forward and change direction according to input from the right stick
@@ -66,18 +67,50 @@ void ConditionalRunning(bool condition, bool other, vex::motor Motor1, vex::moto
   else
   {
     Runmotor(Motor1, 0, vex::directionType::fwd);
-    Runmotor(Motor1, 0, vex::directionType::fwd);
+    Runmotor(Motor2, 0, vex::directionType::fwd);
+  }
+}
+
+void flagCheck(){
+  if(Controller.ButtonA.pressing()){
+    intakeRunning = true;
+    reve = false;
+  }
+  else if(Controller.ButtonB.pressing()){
+      intakeRunning = true;
+    reve = true;
+  }
+  else if(Controller.ButtonX.pressing()){
+    intakeRunning = false;
+    reve = false;
+  }
+}
+void intakeFunc(){
+  if(intakeRunning){
+    if(reve){
+    Runmotor(intake, 100, vex::directionType::rev);
+
+    }
+    else {
+    Runmotor(intake, 100, vex::directionType::fwd);
+    }
+  }else {
+    Runmotor(intake, 0, vex::directionType::rev);
+
   }
 }
 
 void userControl()
 {
-
-  ConditionalRunning(Controller.ButtonR2.pressing(), Controller.ButtonR1.pressing(), LeftLiftMotor, RightLiftMotor, 25);
-  ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 50);
+  while(1){
+    ConditionalRunning(Controller.ButtonR2.pressing(), Controller.ButtonR1.pressing(), LeftLiftMotor, RightLiftMotor, 25);
+  
+  // ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 100);
   mobility();
-
-  ConditionalRunning(Controller.ButtonL1.pressing(), Controller.ButtonL2.pressing(), ClampMotor1, 25);
+  flagCheck();
+  intakeFunc();
+  ConditionalRunning(Controller.ButtonL1.pressing(), Controller.ButtonL2.pressing(), ClampMotor1, 40);
+  }
 }
 
 int main()
@@ -87,10 +120,9 @@ int main()
 
   vexcodeInit();
 
-  while (1)
-  {
+
     userControl();
-  }
+
   // autonomousA();
   // LeftMotor.spin(vex::directionType::fwd, (Controller.Axis3.value() + Controller.Axis1.value()*2), vex::velocityUnits::pct);//left motor will spin forward and change direction according to input from the right stick
 }

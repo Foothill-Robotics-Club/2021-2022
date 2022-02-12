@@ -25,12 +25,16 @@ vex::motor intake = vex::motor(PORT13);
 vex::motor ClampMotor1 = vex::motor(PORT3);
 vex::directionType fowd = vex::directionType::fwd;
 vex::directionType reve = vex::directionType::rev;
+// vex::drivetrain dt = vex::drivetrain(LeftMotor, RightMotor);
 
+bool intakeRunning = false;
+bool reves = false;
 void mobility()
 {
   LeftMotor.spin(vex::directionType::rev, (Controller.Axis3.value()*1.05), vex::velocityUnits::pct);  // left motor will spin forward and change direction according to input from the right stick
   RightMotor.spin(vex::directionType::fwd, (Controller.Axis2.value()), vex::velocityUnits::pct); // right motor will spin forward and change direction according to input from the left stick
 }
+
 
 void Runmotor(vex::motor Motor, int speed, vex::directionType dir)
 {
@@ -68,7 +72,36 @@ void ConditionalRunning(bool condition, bool other, vex::motor Motor1, vex::moto
   else
   {
     Runmotor(Motor1, 0, vex::directionType::fwd);
-    Runmotor(Motor1, 0, vex::directionType::fwd);
+    Runmotor(Motor2, 0, vex::directionType::fwd);
+  }
+}
+
+void flagCheck(){
+  if(Controller.ButtonA.pressing()){
+    intakeRunning = true;
+    reves = false;
+  }
+  else if(Controller.ButtonB.pressing()){
+      intakeRunning = true;
+    reves = true;
+  }
+  else if(Controller.ButtonX.pressing()){
+    intakeRunning = false;
+    reves = false;
+  }
+}
+void intakeFunc(){
+  if(intakeRunning){
+    if(reves){
+    Runmotor(intake, 100, vex::directionType::rev);
+
+    }
+    else {
+    Runmotor(intake, 100, vex::directionType::fwd);
+    }
+  }else {
+    Runmotor(intake, 0, vex::directionType::rev);
+
   }
 }
 
@@ -76,12 +109,16 @@ void userControl()
 {
   while(1){
     ConditionalRunning(Controller.ButtonR2.pressing(), Controller.ButtonR1.pressing(), LeftLiftMotor, RightLiftMotor, 25);
-    ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 50);
-    mobility();
-
-    ConditionalRunning(Controller.ButtonL1.pressing(), Controller.ButtonL2.pressing(), ClampMotor1, 25);
+  
+  // ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 100);
+  mobility();
+  flagCheck();
+  intakeFunc();
+  ConditionalRunning(Controller.ButtonL1.pressing(), Controller.ButtonL2.pressing(), ClampMotor1, 40);
   }
 }
+
+
 
 
 void runMotorFor(vex::motor Motor, int speed, vex::directionType dir,double t)
@@ -90,6 +127,9 @@ void runMotorFor(vex::motor Motor, int speed, vex::directionType dir,double t)
   Motor.spinFor(dir,t,vex::timeUnits::msec, speed, vex::velocityUnits::rpm);
 }
 
+void clampBot(double t){
+  runMotorFor(ClampMotor1, 50, reve, t);
+}
 
 void rotateBotLeft(double t){
   runMotorFor(RightMotor,50,reve,t);
@@ -99,24 +139,27 @@ void rotateBotRight(double t){
   runMotorFor(LeftMotor,50,reve,t);
   runMotorFor(RightMotor,50,reve,t);
 }
-void driveForward(double t){
-  runMotorFor(LeftMotor,50,fowd, t);
-  runMotorFor(RightMotor,50,reve,t);
+void driveBackward(double t){
+  runMotorFor(LeftMotor,100,fowd, t);
+  runMotorFor(RightMotor,100,reve,t);
 
 
 }
-void driveBackward(double t){
-  runMotorFor(LeftMotor,50,fowd,t);
-  runMotorFor(RightMotor,50,reve,t);
+void driveForward(double t){
+  runMotorFor(LeftMotor,100,fowd,t);
+  runMotorFor(RightMotor,100,reve,t);
 }
 
 void autonomousA(){
-  driveForward(3500);
+  
+  driveForward(2000);
+  clampBot(100);
+  driveBackward(1000);
+
   // runMotorFor(ClampMotor1, 25,fowd, 1000);
-  rotateBotLeft(2000);
-  driveBackward(4500);
-  rotateBotLeft(1000);
-  driveBackward(5500);
+  // rotateBotLeft(2000);
+  // rotateBotLeft(1000);
+  // driveBackward(4000);
   // return false;
 }
 void autonomousB(){
@@ -125,10 +168,6 @@ void autonomousB(){
   driveForward(5000);
   rotateBotRight(1000);
   driveForward(500);
-  driveForward(4000);
-  rotateBotRight(1000);
-  driveForward(1000);
-  rotateBotRight(1000);
   driveForward(4000);
   // return false;
 }

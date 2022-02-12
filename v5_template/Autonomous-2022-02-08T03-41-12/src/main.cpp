@@ -16,13 +16,12 @@ using namespace vex;
 vex::controller Controller;
 vex::competition Competition;
 
-vex::motor LeftMotor = vex::motor(PORT2);
-vex::motor RightMotor = vex::motor(PORT3);
-vex::motor LiftMotor1 = vex::motor(PORT12);
-vex::motor LiftMotor2 = vex::motor(PORT13);
-
-vex::motor intake = vex::motor(PORT11);
-vex::motor ClampMotor1 = vex::motor(PORT1);
+vex::motor LeftMotor = vex::motor(PORT11);
+vex::motor RightMotor = vex::motor(PORT1);
+vex::motor LeftLiftMotor = vex::motor(PORT2);
+vex::motor RightLiftMotor = vex::motor(PORT12);
+vex::motor intake = vex::motor(PORT13);
+vex::motor ClampMotor1 = vex::motor(PORT3);
 vex::directionType fowd = vex::directionType::fwd;
 vex::directionType reve = vex::directionType::rev;
 
@@ -64,15 +63,30 @@ void driveBackward(double t){
   runMotorFor(LeftMotor,50,fowd,t);
   runMotorFor(RightMotor,50,reve,t);
 }
+void clampBot(double t){
+  runMotorFor(ClampMotor1, 50, fowd, t);
+}
+
+void Runmotor(vex::motor Motor, int speed, vex::directionType dir)
+{
+  Motor.spin(dir, speed, vex::velocityUnits::pct);
+}
 
 bool autonomousA(){
-  driveForward(3500);
-  runMotorFor(ClampMotor1, 25,fowd, 1000);
-  rotateBotLeft(2000);
-  driveBackward(4500);
-  rotateBotLeft(1000);
-  driveBackward(5500);
+  Runmotor(LeftMotor, 50, reve);
+  Runmotor(RightMotor, 50, fowd);
+  wait(2,sec);
+  Runmotor(LeftMotor, 0, reve);
+  Runmotor(RightMotor, 0, fowd);
+  runMotorFor(ClampMotor1, 50, fowd, 2);
+  runMotorFor(ClampMotor1, 50, fowd, 2);
+  Runmotor(LeftMotor, 50, fowd);
+  Runmotor(RightMotor, 50, reve);
+  wait(2,sec);
+  Runmotor(LeftMotor, 0, fowd);
+  Runmotor(RightMotor, 0, reve);
   return false;
+
 }
 bool autonomousB(){
   driveForward(3500);
