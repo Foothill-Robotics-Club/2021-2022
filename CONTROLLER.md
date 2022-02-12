@@ -18,20 +18,11 @@ The following is an example of documentation generated directly from source code
 
 ### Bumpers (1-4), Joysticks (5-6), Arrows (7-10), Letters (11-14)
 
-1. R1: intake button
-2. L1: outtake button
-3. R2: move intake to open
-4. L2: move intake to closed
-5. Left Joystick: left side drive motors
-6. Right Joystick: right side drive motors
-7. down: tray pos down
-8. left: raise tray
-9. up: tray pos up
-10. right: lower tray
-11. Y: toggle tray
-12. X: toggle intake
-13. A: place stack
-14. B: drive brake toggle
+1. R1/R2: Forklift up/down
+2. L1/L2: Open/Close claw
+3. A/B: Intake System
+4. Left Joystick: left side drive motors
+5. Right Joystick: right side drive motors
 
 ---
 

@@ -75,14 +75,13 @@ void ConditionalRunning(bool condition, bool other, vex::motor Motor1, vex::moto
 void userControl()
 {
   while(1){
-    ConditionalRunning(Controller.ButtonX.pressing(), Controller.ButtonY.pressing(), LeftLiftMotor, RightLiftMotor, 25);
+    ConditionalRunning(Controller.ButtonR2.pressing(), Controller.ButtonR1.pressing(), LeftLiftMotor, RightLiftMotor, 25);
     ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 70);
     mobility();
 
     ConditionalRunning(Controller.ButtonL1.pressing(), Controller.ButtonL2.pressing(), ClampMotor1, 25);
   }
 }
-
 
 
 void runMotorFor(vex::motor Motor, int speed, vex::directionType dir,double t)

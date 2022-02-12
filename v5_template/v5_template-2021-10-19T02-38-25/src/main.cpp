@@ -29,6 +29,7 @@ void mobility()
   RightMotor.spin(vex::directionType::fwd, (Controller.Axis2.value()), vex::velocityUnits::pct); // right motor will spin forward and change direction according to input from the left stick
 }
 
+
 void Runmotor(vex::motor Motor, int speed, vex::directionType dir)
 {
   Motor.spin(dir, speed, vex::velocityUnits::pct);
@@ -72,7 +73,7 @@ void ConditionalRunning(bool condition, bool other, vex::motor Motor1, vex::moto
 void userControl()
 {
 
-  ConditionalRunning(Controller.ButtonX.pressing(), Controller.ButtonY.pressing(), LeftLiftMotor, RightLiftMotor, 25);
+  ConditionalRunning(Controller.ButtonR2.pressing(), Controller.ButtonR1.pressing(), LeftLiftMotor, RightLiftMotor, 25);
   ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 70);
   mobility();
 
