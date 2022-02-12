@@ -15,13 +15,12 @@
 using namespace vex;
 vex::controller Controller;
 vex::competition Competition;
-vex::motor LeftMotor = vex::motor(PORT2);
-vex::motor RightMotor = vex::motor(PORT3);
-vex::motor LiftMotor1 = vex::motor(PORT12);
-vex::motor LiftMotor2 = vex::motor(PORT13);
-
-vex::motor intake = vex::motor(PORT11);
-vex::motor ClampMotor1 = vex::motor(PORT1);
+vex::motor LeftMotor = vex::motor(PORT11);
+vex::motor RightMotor = vex::motor(PORT1);
+vex::motor LeftLiftMotor = vex::motor(PORT2);
+vex::motor RightLiftMotor = vex::motor(PORT12);
+vex::motor intake = vex::motor(PORT13);
+vex::motor ClampMotor1 = vex::motor(PORT3);
 
 void mobility()
 {
@@ -63,7 +62,7 @@ void ConditionalRunning(bool condition, bool other, vex::motor Motor1, vex::moto
   else
   {
     Runmotor(Motor1, 0, vex::directionType::fwd);
-    Runmotor(Motor1, 0, vex::directionType::fwd);
+    Runmotor(Motor2, 0, vex::directionType::fwd);
   }
 }
 
@@ -72,7 +71,7 @@ void ConditionalRunning(bool condition, bool other, vex::motor Motor1, vex::moto
 void userControl()
 {
 
-  ConditionalRunning(Controller.ButtonX.pressing(), Controller.ButtonY.pressing(), LiftMotor1, LiftMotor2, 25);
+  ConditionalRunning(Controller.ButtonX.pressing(), Controller.ButtonY.pressing(), LeftLiftMotor, RightLiftMotor, 25);
   ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 50);
   mobility();
   ConditionalRunning(Controller.ButtonR2.pressing(),Controller.ButtonL2.pressing(),ClampMotor1,50);

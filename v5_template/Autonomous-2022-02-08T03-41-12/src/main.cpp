@@ -15,14 +15,13 @@ using namespace vex;
 
 vex::controller Controller;
 vex::competition Competition;
+vex::motor LeftMotor = vex::motor(PORT1);
+vex::motor RightMotor = vex::motor(PORT11);
+vex::motor LeftLiftMotor = vex::motor(PORT2);
+vex::motor RightLiftMotor = vex::motor(PORT12);
+vex::motor intake = vex::motor(PORT13);
+vex::motor ClampMotor1 = vex::motor(PORT3);
 
-vex::motor LeftMotor = vex::motor(PORT2);
-vex::motor RightMotor = vex::motor(PORT3);
-vex::motor LiftMotor1 = vex::motor(PORT12);
-vex::motor LiftMotor2 = vex::motor(PORT13);
-
-vex::motor intake = vex::motor(PORT11);
-vex::motor ClampMotor1 = vex::motor(PORT1);
 vex::directionType fowd = vex::directionType::fwd;
 vex::directionType reve = vex::directionType::rev;
 
@@ -42,7 +41,7 @@ void setup(){
 void Runmotor(vex::motor Motor, int speed, vex::directionType dir,double t)
 {
   
-  Motor.spinFor(dir,t,vex::timeUnits::msec, speed, vex::velocityUnits::rpm);
+  Motor.spinFor(dir,t,vex::timeUnits::msec, speed, vex::velocityUnits::pct);
 }
 
 
