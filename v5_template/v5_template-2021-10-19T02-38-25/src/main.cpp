@@ -9,7 +9,7 @@
 
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // ---- END VEXCODE CONFIGURED DEVICES ----
-  
+
 #include "vex.h"
 
 using namespace vex;
@@ -23,13 +23,10 @@ vex::motor RightLiftMotor = vex::motor(PORT12);
 vex::motor intake = vex::motor(PORT13);
 vex::motor ClampMotor1 = vex::motor(PORT3);
 
-
-
 void mobility()
 {
-  LeftMotor.spin(vex::directionType::rev, (Controller.Axis1.value() + Controller.Axis3.value() * 2), vex::velocityUnits::pct);  // left motor will spin forward and change direction according to input from the right stick
-  RightMotor.spin(vex::directionType::rev, (Controller.Axis1.value() - Controller.Axis3.value() * 2), vex::velocityUnits::pct); // right motor will spin forward and change direction according to input from the left stick
-
+  LeftMotor.spin(vex::directionType::rev, (Controller.Axis3.value()), vex::velocityUnits::pct);  // left motor will spin forward and change direction according to input from the right stick
+  RightMotor.spin(vex::directionType::rev, (Controller.Axis2.value()), vex::velocityUnits::pct); // right motor will spin forward and change direction according to input from the left stick
 }
 
 void Runmotor(vex::motor Motor, int speed, vex::directionType dir)
@@ -71,8 +68,6 @@ void ConditionalRunning(bool condition, bool other, vex::motor Motor1, vex::moto
     Runmotor(Motor1, 0, vex::directionType::fwd);
   }
 }
-
-
 
 void userControl()
 {
