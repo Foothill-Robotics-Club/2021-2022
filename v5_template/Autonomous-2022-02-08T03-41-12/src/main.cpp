@@ -64,7 +64,6 @@ void driveBackward(double t){
 }
 
 bool autonomousA(){
-  // move forward for 3.5'
   driveForward(3500);
   Runmotor(ClampMotor1, 25,fowd, 1000);
   rotateBotLeft(2000);
@@ -90,13 +89,13 @@ bool autonomousB(){
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  bool running =1;
+  bool running = 1;
   setup();
   while(!Controller.ButtonL1.pressing()){}
   Brain.Screen.clearScreen();
   while(running){
     running = autonomousA();
-    running = autonomousB();
+    //running = autonomousB();
   }
   
 }
