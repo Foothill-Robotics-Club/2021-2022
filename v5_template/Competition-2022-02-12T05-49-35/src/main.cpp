@@ -152,9 +152,24 @@ void driveForward(double t){
 
 void autonomousA(){
   
-  driveForward(2000);
-  clampBot(100);
-  driveBackward(1000);
+  Runmotor(LeftMotor, 100, reve);
+  Runmotor(RightMotor, 50, fowd);
+  wait(2,sec);
+  Runmotor(LeftMotor, 0, reve);
+  Runmotor(RightMotor, 0, fowd);
+  wait(500,msec);
+  Runmotor(LeftLiftMotor,50,fowd);
+  Runmotor(RightLiftMotor,50,reve);
+  wait(750,msec);
+  runMotorFor(ClampMotor1, 50, reve, 1000);
+  runMotorFor(ClampMotor1, 50, fowd, 1000);
+  wait(500,msec);
+  Runmotor(LeftMotor, 100, fowd);
+  Runmotor(RightMotor, 50, reve);
+  wait(2,sec);
+  Runmotor(LeftMotor, 0, fowd);
+  Runmotor(RightMotor, 0, reve);
+  wait(1, sec);
 
   // runMotorFor(ClampMotor1, 25,fowd, 1000);
   // rotateBotLeft(2000);
