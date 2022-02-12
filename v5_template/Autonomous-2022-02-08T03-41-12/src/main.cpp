@@ -49,6 +49,10 @@ void rotateBotLeft(double t){
   Runmotor(RightMotor,50,reve,t);
   Runmotor(LeftMotor,50,reve,t);
 }
+void rotateBotRight(double t){
+  Runmotor(LeftMotor,50,reve,t);
+  Runmotor(RightMotor,50,reve,t);
+}
 void driveForward(double t){
   Runmotor(LeftMotor,50,fowd, t);
   Runmotor(RightMotor,50,reve,t);
@@ -61,7 +65,6 @@ void driveBackward(double t){
 }
 
 bool autonomousA(){
-  // move forward for 3.5'
   driveForward(3500);
   Runmotor(ClampMotor1, 25,fowd, 1000);
   rotateBotLeft(2000);
@@ -70,20 +73,30 @@ bool autonomousA(){
   driveBackward(5500);
   return false;
 }
-void autonomousB(){
-
+bool autonomousB(){
+  driveForward(3500);
+  rotateBotRight(1000);
+  driveForward(5000);
+  rotateBotRight(1000);
+  driveForward(500);
+  driveForward(4000);
+  rotateBotRight(1000);
+  driveForward(1000);
+  rotateBotRight(1000);
+  driveForward(4000);
+  return false;
 }
 
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  bool running =1;
+  bool running = 1;
   setup();
   while(!Controller.ButtonL1.pressing()){}
   Brain.Screen.clearScreen();
   while(running){
     running = autonomousA();
-    // autonomousB();
+    //running = autonomousB();
   }
   
 }

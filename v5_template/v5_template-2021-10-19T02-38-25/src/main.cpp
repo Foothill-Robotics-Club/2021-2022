@@ -15,6 +15,7 @@
 using namespace vex;
 vex::controller Controller;
 vex::competition Competition;
+<<<<<<< HEAD
 vex::motor LeftMotor = vex::motor(PORT11);
 vex::motor RightMotor = vex::motor(PORT1);
 vex::motor LeftLiftMotor = vex::motor(PORT2);
@@ -26,7 +27,22 @@ void mobility()
 {
   LeftMotor.spin(vex::directionType::rev, (Controller.Axis3.value() * 2), vex::velocityUnits::pct);  // left motor will spin forward and change direction according to input from the right stick
   RightMotor.spin(vex::directionType::fwd, (Controller.Axis2.value() * 2), vex::velocityUnits::pct); // right motor will spin forward and change direction according to input from the left stick
+=======
+vex::motor LeftMotor = vex::motor(PORT13);
+vex::motor RightMotor = vex::motor(PORT3);
+vex::motor LiftMotor1 = vex::motor(PORT2);
+vex::motor LiftMotor2 = vex::motor(PORT12);
+
+vex::motor intake = vex::motor(PORT11);
+vex::motor ClampMotor1 = vex::motor(PORT1);
+
+void mobility()
+{
+  LeftMotor.spin(vex::directionType::rev, (Controller.Axis1.value() + Controller.Axis3.value() * 2), vex::velocityUnits::pct);  // left motor will spin forward and change direction according to input from the right stick
+  RightMotor.spin(vex::directionType::rev, (Controller.Axis1.value() - Controller.Axis3.value() * 2), vex::velocityUnits::pct); // right motor will spin forward and change direction according to input from the left stick
+>>>>>>> fd45c7c19e2bda5f3afe860ce146d5f5cbb0c370
 }
+
 void Runmotor(vex::motor Motor, int speed, vex::directionType dir)
 {
   Motor.spin(dir, speed, vex::velocityUnits::pct);
@@ -47,6 +63,7 @@ void ConditionalRunning(bool condition, bool other, vex::motor Motor, int speed)
     Runmotor(Motor, 0, vex::directionType::fwd);
   }
 }
+
 void ConditionalRunning(bool condition, bool other, vex::motor Motor1, vex::motor Motor2, int speed)
 {
   if (condition)
@@ -74,7 +91,11 @@ void userControl()
   ConditionalRunning(Controller.ButtonX.pressing(), Controller.ButtonY.pressing(), LeftLiftMotor, RightLiftMotor, 25);
   ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 50);
   mobility();
+<<<<<<< HEAD
   ConditionalRunning(Controller.ButtonR2.pressing(),Controller.ButtonL2.pressing(),ClampMotor1,50);
+=======
+  ConditionalRunning(Controller.ButtonL1.pressing(), Controller.ButtonL2.pressing(), ClampMotor1, 25);
+>>>>>>> fd45c7c19e2bda5f3afe860ce146d5f5cbb0c370
 }
 
 int main()
