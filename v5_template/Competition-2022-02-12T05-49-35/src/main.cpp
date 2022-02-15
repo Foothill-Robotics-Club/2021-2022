@@ -149,34 +149,40 @@ void driveForward(double t){
   runMotorFor(LeftMotor,100,fowd,t);
   runMotorFor(RightMotor,100,reve,t);
 }
-
-void autonomousA(){
-  
+bool autonomousA(){
+  runMotorFor(ClampMotor1, 100, fowd, 1000);
+  Runmotor(LeftMotor,80,fowd);
+  Runmotor(RightMotor,80,reve);
+  wait(1000,msec);
   Runmotor(LeftMotor, 100, reve);
   Runmotor(RightMotor, 50, fowd);
-  wait(2,sec);
+  wait(500, msec);
+  Runmotor(LeftLiftMotor,40,reve);
+  Runmotor(RightLiftMotor,40,fwd);
+  wait(1000,msec);
+  Runmotor(LeftMotor, 100, reve);
+  Runmotor(RightMotor, 50, fowd);
+  wait(1,sec);
   Runmotor(LeftMotor, 0, reve);
   Runmotor(RightMotor, 0, fowd);
-  wait(500,msec);
-  Runmotor(LeftLiftMotor,50,fowd);
-  Runmotor(RightLiftMotor,50,reve);
-  wait(750,msec);
-  runMotorFor(ClampMotor1, 50, reve, 1000);
-  runMotorFor(ClampMotor1, 50, fowd, 1000);
-  wait(500,msec);
+  wait(500, msec);
+  runMotorFor(ClampMotor1, 100, reve, 1000);
+  wait(1, sec);
+  Runmotor(LeftMotor, 100, reve);
+  Runmotor(RightMotor, 50, fowd);
+  wait(300,msec);
+  Runmotor(LeftMotor, 0, reve);
+  Runmotor(RightMotor, 0, fowd);
+  runMotorFor(ClampMotor1, 100, fowd, 1500);
+  wait(1000,msec);
   Runmotor(LeftMotor, 100, fowd);
   Runmotor(RightMotor, 50, reve);
-  wait(2,sec);
+  wait(2.5,sec);
   Runmotor(LeftMotor, 0, fowd);
   Runmotor(RightMotor, 0, reve);
   wait(1, sec);
-
-  // runMotorFor(ClampMotor1, 25,fowd, 1000);
-  // rotateBotLeft(2000);
-  // rotateBotLeft(1000);
-  // driveBackward(4000);
-  // return false;
-}
+  return false;
+}  
 void autonomousB(){
   driveForward(3500);
   rotateBotRight(1000);
