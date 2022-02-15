@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       C:\Users\seant                                            */
-/*    Created:      Mon Oct 18 2021                                           */
+/*    Author:       C:\Users\socce                                            */
+/*    Created:      Fri Feb 11 2022                                           */
 /*    Description:  V5 project                                                */
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -13,6 +13,7 @@
 #include "vex.h"
 
 using namespace vex;
+
 vex::controller Controller;
 vex::competition Competition;
 
@@ -22,8 +23,12 @@ vex::motor LeftLiftMotor = vex::motor(PORT2);
 vex::motor RightLiftMotor = vex::motor(PORT12);
 vex::motor intake = vex::motor(PORT13);
 vex::motor ClampMotor1 = vex::motor(PORT3);
+vex::directionType fowd = vex::directionType::fwd;
+vex::directionType reve = vex::directionType::rev;
+// vex::drivetrain dt = vex::drivetrain(LeftMotor, RightMotor);
+
 bool intakeRunning = false;
-bool reve = false;
+bool reves = false;
 void mobility()
 {
   LeftMotor.spin(vex::directionType::rev, (Controller.Axis3.value()*1.05), vex::velocityUnits::pct);  // left motor will spin forward and change direction according to input from the right stick
@@ -74,20 +79,20 @@ void ConditionalRunning(bool condition, bool other, vex::motor Motor1, vex::moto
 void flagCheck(){
   if(Controller.ButtonA.pressing()){
     intakeRunning = true;
-    reve = false;
+    reves = false;
   }
   else if(Controller.ButtonB.pressing()){
       intakeRunning = true;
-    reve = true;
+    reves = true;
   }
   else if(Controller.ButtonX.pressing()){
     intakeRunning = false;
-    reve = false;
+    reves = false;
   }
 }
 void intakeFunc(){
   if(intakeRunning){
-    if(reve){
+    if(reves){
     Runmotor(intake, 100, vex::directionType::rev);
 
     }
@@ -113,16 +118,92 @@ void userControl()
   }
 }
 
-int main()
+
+
+
+void runMotorFor(vex::motor Motor, int speed, vex::directionType dir,double t)
 {
+  
+  Motor.spinFor(dir,t,vex::timeUnits::msec, speed, vex::velocityUnits::rpm);
+}
+
+void clampBot(double t){
+  runMotorFor(ClampMotor1, 50, reve, t);
+}
+
+void rotateBotLeft(double t){
+  runMotorFor(RightMotor,50,reve,t);
+  runMotorFor(LeftMotor,50,reve,t);
+}
+void rotateBotRight(double t){
+  runMotorFor(LeftMotor,50,reve,t);
+  runMotorFor(RightMotor,50,reve,t);
+}
+void driveBackward(double t){
+  runMotorFor(LeftMotor,100,fowd, t);
+  runMotorFor(RightMotor,100,reve,t);
+
+
+}
+void driveForward(double t){
+  runMotorFor(LeftMotor,100,fowd,t);
+  runMotorFor(RightMotor,100,reve,t);
+}
+bool autonomousA(){
+  runMotorFor(ClampMotor1, 100, fowd, 1000);
+  Runmotor(LeftMotor,80,fowd);
+  Runmotor(RightMotor,80,reve);
+  wait(1000,msec);
+  Runmotor(LeftMotor, 100, reve);
+  Runmotor(RightMotor, 50, fowd);
+  wait(500, msec);
+  Runmotor(LeftLiftMotor,40,reve);
+  Runmotor(RightLiftMotor,40,fwd);
+  wait(1000,msec);
+  Runmotor(LeftMotor, 100, reve);
+  Runmotor(RightMotor, 50, fowd);
+  wait(1,sec);
+  Runmotor(LeftMotor, 0, reve);
+  Runmotor(RightMotor, 0, fowd);
+  wait(500, msec);
+  runMotorFor(ClampMotor1, 100, reve, 1000);
+  wait(1, sec);
+  Runmotor(LeftMotor, 100, reve);
+  Runmotor(RightMotor, 50, fowd);
+  wait(300,msec);
+  Runmotor(LeftMotor, 0, reve);
+  Runmotor(RightMotor, 0, fowd);
+  runMotorFor(ClampMotor1, 100, fowd, 1500);
+  wait(1000,msec);
+  Runmotor(LeftMotor, 100, fowd);
+  Runmotor(RightMotor, 50, reve);
+  wait(2.5,sec);
+  Runmotor(LeftMotor, 0, fowd);
+  Runmotor(RightMotor, 0, reve);
+  wait(1, sec);
+  return false;
+}  
+void autonomousB(){
+  driveForward(3500);
+  rotateBotRight(1000);
+  driveForward(5000);
+  rotateBotRight(1000);
+  driveForward(500);
+  driveForward(4000);
+  // return false;
+}
+
+void autonomous(){
+  autonomousA();
+  // autonomousB();
+}
+
+
+int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
-  // bool test = true;
-
   vexcodeInit();
-
-
-    userControl();
-
-  // autonomousA();
-  // LeftMotor.spin(vex::directionType::fwd, (Controller.Axis3.value() + Controller.Axis1.value()*2), vex::velocityUnits::pct);//left motor will spin forward and change direction according to input from the right stick
+  Competition.drivercontrol(userControl);
+  Competition.autonomous(autonomous);
+  
+  
 }
