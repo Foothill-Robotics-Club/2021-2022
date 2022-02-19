@@ -17,24 +17,25 @@ using namespace vex;
 vex::controller Controller;
 vex::competition Competition;
 
-vex::motor LeftMotor = vex::motor(PORT11);
-vex::motor RightMotor = vex::motor(PORT1);
-vex::motor LeftLiftMotor = vex::motor(PORT2);
-vex::motor RightLiftMotor = vex::motor(PORT12);
-vex::motor intake = vex::motor(PORT13);
-vex::motor ClampMotor1 = vex::motor(PORT3);
+vex::motor LeftBackMotor = vex::motor(PORT1);
+vex::motor RightBackMotor = vex::motor(PORT11);
+vex::motor LeftFrontMotor = vex::motor(PORT2);
+vex::motor RightFrontMotor = vex::motor(PORT12);
+vex::motor LeftLiftMotor = vex::motor(PORT3);
+vex::motor RightLiftMotor = vex::motor(PORT13);
 vex::directionType fowd = vex::directionType::fwd;
 vex::directionType reve = vex::directionType::rev;
-// vex::drivetrain dt = vex::drivetrain(LeftMotor, RightMotor);
+digital_out dig1 = digital_out(Brain.ThreeWirePort.H);
 
 bool intakeRunning = false;
 bool reves = false;
 void mobility()
 {
-  LeftMotor.spin(vex::directionType::rev, (Controller.Axis3.value()*1.05), vex::velocityUnits::pct);  // left motor will spin forward and change direction according to input from the right stick
-  RightMotor.spin(vex::directionType::fwd, (Controller.Axis2.value()), vex::velocityUnits::pct); // right motor will spin forward and change direction according to input from the left stick
+  LeftBackMotor.spin(vex::directionType::rev, (Controller.Axis3.value()), vex::velocityUnits::pct);  // left motor will spin forward and change direction according to input from the right stick
+  LeftFrontMotor.spin(vex::directionType::rev, (Controller.Axis3.value()), vex::velocityUnits::pct);  // left motor will spin forward and change direction according to input from the right stick
+  RightBackMotor.spin(vex::directionType::fwd, (Controller.Axis2.value()), vex::velocityUnits::pct); // right motor will spin forward and change direction according to input from the left stick
+  RightFrontMotor.spin(vex::directionType::fwd, (Controller.Axis2.value()), vex::velocityUnits::pct);  // left motor will spin forward and change direction according to input from the right stick
 }
-
 
 void Runmotor(vex::motor Motor, int speed, vex::directionType dir)
 {
@@ -76,45 +77,43 @@ void ConditionalRunning(bool condition, bool other, vex::motor Motor1, vex::moto
   }
 }
 
-void flagCheck(){
-  if(Controller.ButtonA.pressing()){
-    intakeRunning = true;
-    reves = false;
-  }
-  else if(Controller.ButtonB.pressing()){
-      intakeRunning = true;
-    reves = true;
-  }
-  else if(Controller.ButtonX.pressing()){
-    intakeRunning = false;
-    reves = false;
-  }
-}
-void intakeFunc(){
-  if(intakeRunning){
-    if(reves){
-    Runmotor(intake, 100, vex::directionType::rev);
+// void flagCheck(){
+//   if(Controller.ButtonA.pressing()){
+//     // intakeRunning = true;
+//     reves = false;
+//   }
+//   else if(Controller.ButtonB.pressing()){
+//     // intakeRunning = true;
+//     reves = true;
+//   }
+//   else if(Controller.ButtonX.pressing()){
+//     // intakeRunning = false;
+//     reves = false;
+//   }
+// }
+// void intakeFunc(){
+//   if(intakeRunning){
+//     if(reves){
+//     Runmotor(intake, 100, vex::directionType::rev);
 
-    }
-    else {
-    Runmotor(intake, 100, vex::directionType::fwd);
-    }
-  }else {
-    Runmotor(intake, 0, vex::directionType::rev);
+//     }
+//     else {
+//     Runmotor(intake, 100, vex::directionType::fwd);
+//     }
+//   }else {
+//     Runmotor(intake, 0, vex::directionType::rev);
 
-  }
-}
+//   }
+// }
 
 void userControl()
 {
   while(1){
     ConditionalRunning(Controller.ButtonR2.pressing(), Controller.ButtonR1.pressing(), LeftLiftMotor, RightLiftMotor, 25);
-  
   // ConditionalRunning(Controller.ButtonA.pressing(), Controller.ButtonB.pressing(), intake, 100);
   mobility();
-  flagCheck();
-  intakeFunc();
-  ConditionalRunning(Controller.ButtonL1.pressing(), Controller.ButtonL2.pressing(), ClampMotor1, 40);
+  // flagCheck();
+  // intakeFunc();
   }
 }
 
@@ -127,75 +126,78 @@ void runMotorFor(vex::motor Motor, int speed, vex::directionType dir,double t)
   Motor.spinFor(dir,t,vex::timeUnits::msec, speed, vex::velocityUnits::rpm);
 }
 
-void clampBot(double t){
-  runMotorFor(ClampMotor1, 50, reve, t);
-}
+// void clampBot(double t){
+//   runMotorFor(ClampMotor1, 50, reve, t);
+// }
 
 void rotateBotLeft(double t){
-  runMotorFor(RightMotor,50,reve,t);
-  runMotorFor(LeftMotor,50,reve,t);
+  runMotorFor(RightBackMotor,50,reve,t);
+  runMotorFor(LeftBackMotor,50,reve,t);
+  runMotorFor(RightFrontMotor,50,reve,t);
+  runMotorFor(LeftFrontMotor,50,reve,t);
 }
 void rotateBotRight(double t){
-  runMotorFor(LeftMotor,50,reve,t);
-  runMotorFor(RightMotor,50,reve,t);
+  runMotorFor(RightBackMotor,50,fowd,t);
+  runMotorFor(LeftBackMotor,50,fowd,t);
+  runMotorFor(RightFrontMotor,50,fowd,t);
+  runMotorFor(LeftFrontMotor,50,fowd,t);
 }
 void driveBackward(double t){
-  runMotorFor(LeftMotor,100,fowd, t);
-  runMotorFor(RightMotor,100,reve,t);
-
-
+  runMotorFor(RightBackMotor,50,fowd,t);
+  runMotorFor(LeftBackMotor,50,reve,t);
+  runMotorFor(RightFrontMotor,50,fowd,t);
+  runMotorFor(LeftFrontMotor,50,reve,t);
 }
 void driveForward(double t){
-  runMotorFor(LeftMotor,100,fowd,t);
-  runMotorFor(RightMotor,100,reve,t);
+  runMotorFor(RightBackMotor,50,reve,t);
+  runMotorFor(LeftBackMotor,50,fowd,t);
+  runMotorFor(RightFrontMotor,50,reve,t);
+  runMotorFor(LeftFrontMotor,50,fowd,t);
 }
-bool autonomousA(){
-  runMotorFor(ClampMotor1, 100, fowd, 1000);
-  Runmotor(LeftMotor,80,fowd);
-  Runmotor(RightMotor,80,reve);
-  wait(1000,msec);
-  Runmotor(LeftMotor, 100, reve);
-  Runmotor(RightMotor, 50, fowd);
-  wait(500, msec);
-  Runmotor(LeftLiftMotor,40,reve);
-  Runmotor(RightLiftMotor,40,fwd);
-  wait(1000,msec);
-  Runmotor(LeftMotor, 100, reve);
-  Runmotor(RightMotor, 50, fowd);
-  wait(1,sec);
-  Runmotor(LeftMotor, 0, reve);
-  Runmotor(RightMotor, 0, fowd);
-  wait(500, msec);
-  runMotorFor(ClampMotor1, 100, reve, 1000);
-  wait(1, sec);
-  Runmotor(LeftMotor, 100, reve);
-  Runmotor(RightMotor, 50, fowd);
-  wait(300,msec);
-  Runmotor(LeftMotor, 0, reve);
-  Runmotor(RightMotor, 0, fowd);
-  runMotorFor(ClampMotor1, 100, fowd, 1500);
-  wait(1000,msec);
-  Runmotor(LeftMotor, 100, fowd);
-  Runmotor(RightMotor, 50, reve);
-  wait(2.5,sec);
-  Runmotor(LeftMotor, 0, fowd);
-  Runmotor(RightMotor, 0, reve);
-  wait(1, sec);
+bool autonomousA() {
+  runMotorFor(LeftBackMotor, 100, fowd, 1500);
+  runMotorFor(RightBackMotor, 90, reve, 1500);
+  runMotorFor(LeftFrontMotor, 100, fowd, 1500);
+  runMotorFor(RightFrontMotor, 90, reve, 1500);
+  Runmotor(LeftLiftMotor,80,reve);
+  Runmotor(RightLiftMotor,80,fowd);
+  wait(300, msec);
+  Runmotor(LeftLiftMotor,80,fowd);
+  Runmotor(RightLiftMotor,80,reve);
+  wait(300, msec);
+  driveForward(400);
+  wait(300, msec);
+  runMotorFor(LeftBackMotor, 100, reve, 1500);
+  runMotorFor(RightBackMotor, 90, fowd, 1500);
+  runMotorFor(LeftFrontMotor, 100, reve, 1500);
+  runMotorFor(RightFrontMotor, 90, fowd, 1500);
+  rotateBotRight(400);
   return false;
 }  
-void autonomousB(){
-  driveForward(3500);
-  rotateBotRight(1000);
-  driveForward(5000);
-  rotateBotRight(1000);
-  driveForward(500);
-  driveForward(4000);
-  // return false;
+bool autonomousB(){
+  driveForward(1000);
+  Runmotor(LeftLiftMotor,80,reve);
+  Runmotor(RightLiftMotor,80,fowd);
+  wait(300, msec);
+  driveForward(400);
+  Runmotor(LeftLiftMotor,80,fowd);
+  Runmotor(RightLiftMotor,80,reve);
+  wait(300, msec);
+  return false;
 }
-
+bool autonomousC() {
+  if (Controller.ButtonL1.pressing()) {
+      dig1.set(true);
+  }
+  else {
+      dig1.set(false);
+  }
+  return false;
+}
 void autonomous(){
-  autonomousA();
+  // autonomousA();
   // autonomousB();
+  autonomousC();
 }
 
 
@@ -204,6 +206,16 @@ int main() {
   vexcodeInit();
   Competition.drivercontrol(userControl);
   Competition.autonomous(autonomous);
-  
-  
+  vex::controller master(vex::controllerType::primary);
+  digital_out dig1 = digital_out(Brain.ThreeWirePort.A);
+
+  while(1) {
+    if( master.ButtonL1.pressing() ) {
+      dig1.set( false );
+    }
+    else {
+      dig1.set( true );
+    }
+    this_thread::sleep_for(10);
+  }
 }
