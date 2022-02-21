@@ -8,6 +8,8 @@ extern motor_group LeftMotors;
 extern motor_group RightMotors;
 extern motor_group LiftMotors;
 extern controller Controller1;
+extern motor ClampMvmt;
+extern motor ClampPress;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.

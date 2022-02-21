@@ -19,6 +19,8 @@ motor LiftMotorsMotorA = motor(PORT3, ratio36_1, false);
 motor LiftMotorsMotorB = motor(PORT13, ratio36_1, true);
 motor_group LiftMotors = motor_group(LiftMotorsMotorA, LiftMotorsMotorB);
 controller Controller1 = controller(primary);
+motor ClampMvmt = motor(PORT4, ratio18_1, false);
+motor ClampPress = motor(PORT5, ratio6_1, false);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
