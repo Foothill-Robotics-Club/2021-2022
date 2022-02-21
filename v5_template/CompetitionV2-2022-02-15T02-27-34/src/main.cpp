@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       C:\Users\socce                                            */
+/*    Author:       C:\Users\adivs                                            */
 /*    Created:      Mon Feb 14 2022                                           */
 /*    Description:  V5 project                                                */
 /*                                                                            */
@@ -39,8 +39,14 @@ int main()
 {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
+
+  // Runs User Control
   // userControl();
+
+  // Runs Autonomous Code (Check auton function for which auton we're running!)
   // auton();
+
+  // Competition Format
   Competition.autonomous(auton);
   Competition.drivercontrol(userControl);
 }

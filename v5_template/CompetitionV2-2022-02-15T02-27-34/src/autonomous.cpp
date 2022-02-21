@@ -8,7 +8,6 @@ extern motor_group LiftMotors;
 extern digital_out DigitalOutA;
 extern motor ClampMvmt;
 
-// drivetrain dt = drivetrain(LeftMotors, RightMotors);
 void mobility(double duration, double speed, directionType dir)
 {
   LeftMotors.spin(dir, speed, velocityUnits::pct);
