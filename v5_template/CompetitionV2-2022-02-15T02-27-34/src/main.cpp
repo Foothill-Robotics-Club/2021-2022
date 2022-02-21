@@ -10,11 +10,11 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// DigitalOutA          digital_out   A               
-// DigitalOutB          digital_out   B               
-// LeftMotors           motor_group   1, 2            
-// RightMotors          motor_group   11, 12          
+// DigitalOutA          digital_out   A
+// LeftMotors           motor_group   1, 2
+// RightMotors          motor_group   11, 12
+// LiftMotors           motor_group   3, 13
+// Controller1          controller
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -25,18 +25,21 @@ using namespace vex;
 competition Competition;
 extern brain Brain;
 
-void auton(){
+void auton()
+{
   Brain.Screen.clearScreen();
-  Brain.Screen.print("Running Autonomous A")
-  autonA();
+  Brain.Screen.print("Running Autonomous A");
+
+  // autonA();
+  autonB();
 }
 
-int main() {
+int main()
+{
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  userControl();
+  // userControl();
+  auton();
   // Competition.autonomous(auton);
   // Competition.drivercontrol(userControl);
-  
 }
-
