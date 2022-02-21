@@ -16,7 +16,6 @@
 // LiftMotors           motor_group   3, 13           
 // Controller1          controller                    
 // ClampMvmt            motor         4               
-// ClampPress           motor         5               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -31,17 +30,17 @@ void auton()
 {
   Brain.Screen.clearScreen();
   Brain.Screen.print("Running Autonomous A");
-
-  // autonA();
-  autonB();
+  autonA();
+  // Brain.Screen.print("Running Autonomous B");
+  // autonB();
 }
 
 int main()
 {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  userControl();
+  // userControl();
   // auton();
-  // Competition.autonomous(auton);
-  // Competition.drivercontrol(userControl);
+  Competition.autonomous(auton);
+  Competition.drivercontrol(userControl);
 }
