@@ -2,6 +2,194 @@
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
 // Controller1          controller                    
+// LeftMotors           motor_group   1, 8            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   H               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// LiftMotor            motor         18              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 8            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   H               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// LiftMotor            motor         18              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 8            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// LiftMotor            motor         18              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 8            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// LiftMotor            motor         18              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 8            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// LiftMotor            motor         18              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 8            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// Motor18              motor         18              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 8            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// LiftMotor            motor         3               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// LiftMotor            motor         3               
+// BackLiftLeft         motor         4               
+// BackLiftRight        motor         13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// LiftMotor            motor         3               
+// BackLiftLeft         motor         4               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
 // LeftMotors           motor_group   1, 2            
 // RightMotors          motor_group   11, 12          
 // pneum                digital_out   A               

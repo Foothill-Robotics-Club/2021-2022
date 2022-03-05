@@ -7,6 +7,8 @@ extern controller Controller1;
 extern motor_group LeftMotors;
 extern motor_group RightMotors;
 extern digital_out pneum;
+extern motor BackLiftLeft;
+extern motor BackLiftRight;
 extern motor LiftMotor;
 
 /**

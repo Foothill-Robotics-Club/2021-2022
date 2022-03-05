@@ -3,7 +3,7 @@ using namespace vex;
 extern motor_group LeftMotors;
 extern motor_group RightMotors;
 extern motor_group LiftMotors;
-extern digital_out DigitalOutA;
+extern digital_out pneum;
 
 void mobility(double duration, double speed, directionType dir)
 {
@@ -38,5 +38,18 @@ void turnRight(double duration)
     mobility(duration, 50, 50, forward, reverse);
 }
 
-void autonA(bool left) {}
+void autonA(bool left) {
+  pneum.set(true);
+  mobility(2000,100,forward);
+  left ? turnRight(1000):turnLeft(1000);
+  mobility(500,100,forward);
+  pneum.set(false);
+  wait(100,msec);
+  mobility(2000,100,forward);
+  
+  wait(1000,msec);
+  left ? turnLeft(1000):turnRight(1000);
+  mobility(2000,100,reverse);
+  
+}
 void autonB(bool left) {}
