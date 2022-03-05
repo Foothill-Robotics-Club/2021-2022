@@ -4,6 +4,7 @@ extern motor_group LeftMotors;
 extern motor_group RightMotors;
 extern motor_group LiftMotors;
 extern digital_out DigitalOutA;
+extern digital_out pneum;
 
 void mobility(double duration, double speed, directionType dir)
 {
@@ -38,5 +39,19 @@ void turnRight(double duration)
     mobility(duration, 50, 50, forward, reverse);
 }
 
-void autonA(bool left) {}
-void autonB(bool left) {}
+void autonA() {
+  pneum.set(true);
+  mobility(2000,  100, forward);
+  pneum.set(false);
+  mobility(200, 100, forward);
+  pneum.set(true);
+  turnLeft(1000);
+  mobility(1500, 100, forward);
+  lift(1, 100, 500);
+  mobility(300, 100, forward);
+  lift(0, 100, 500);
+}
+
+void autonB() {
+  
+}
