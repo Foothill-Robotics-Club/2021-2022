@@ -7,8 +7,8 @@ extern digital_out pneum;
 extern brain Brain;
 extern motor_group LeftMotors;
 extern motor LiftMotor;
-extern motor BackLiftLeft;
-extern motor BackLiftRight;
+
+motor_group BackMotors = motor_group(BackLiftLeft, BackLiftRight);
 
 void ConditionalRunning(motor_group group, bool condition, bool othercondition, double speed)
 {
@@ -41,9 +41,8 @@ void userControl()
     {
       pneum.set(true);
     }
-    ConditionalRunning(LiftMotor, Controller1.ButtonR1.pressing(), Controller1.ButtonR2.pressing(), 100);
-    ConditionalRunning(BackLiftLeft, Controller1.ButtonX.pressing(), Controller1.ButtonY.pressing(), 50);
-    ConditionalRunning(BackLiftRight, Controller1.ButtonX.pressing(), Controller1.ButtonY.pressing(), 100);
+    ConditionalRunning(LiftMotors, Controller1.ButtonR1.pressing(), Controller1.ButtonR2.pressing(), 100);
+    ConditionalRunning(BackMotors, Controller1.ButtonX.pressing(), Controller1.ButtonY.pressing(), 100);
     LeftMotors.spin(forward, calc((Controller1.Axis3.value() / 127) * 100), velocityUnits::pct);
     RightMotors.spin(forward, calc((Controller1.Axis2.value() / 127) * 127), velocityUnits::pct);
   }

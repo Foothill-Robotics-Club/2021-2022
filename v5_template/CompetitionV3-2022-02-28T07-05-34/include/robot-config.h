@@ -9,7 +9,7 @@ extern motor_group RightMotors;
 extern digital_out pneum;
 extern motor BackLiftLeft;
 extern motor BackLiftRight;
-extern motor LiftMotor;
+extern motor_group LiftMotors;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
