@@ -1,8 +1,43 @@
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// LiftMotor            motor         3               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// LiftMotor            motor         3               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// Motor3               motor         3               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// LeftMotors           motor_group   1, 2            
+// RightMotors          motor_group   11, 12          
+// pneum                digital_out   A               
+// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       C:\Users\socce                                            */
-/*    Created:      Sun Feb 27 2022                                           */
+/*    Author:       C:\Users\adivs                                            */
+/*    Created:      Sun Mar 5 2022                                           */
 /*    Description:  V5 project                                                */
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
